@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { CreateButtons, Players } from './components';
 import styles from './app.module.css';
-import { TicTacToeLogic, ticTacToeStart, ticTacToeBackground } from './utils';
+import { ticTacToeStart } from './utils';
+import { TicTacToeWon } from './utils';
 
 let playerN = 'O',
 	none = 'none',
@@ -29,19 +30,8 @@ export const App = () => {
 		}
 	};
 
-	const TicTacToeWon = (ticTacToe, playerN) => {
-		const resultWon = TicTacToeLogic(ticTacToe, playerN);
-		if (resultWon) {
-			none = 'flex';
-		}
-		if (Object.values(ticTacToe).some((i) => i === '')) {
-			message = 'Player ' + (playerN === 'O' ? '2' : '1') + ' won!';
-		} else {
-			message = 'Nobody won!';
-			none = 'flex';
-		}
-		return { ...ticTacToeBackground, ...resultWon };
-	};
+	const ticTacToeWon = TicTacToeWon(ticTacToe, playerN, none, message);
+
 	return (
 		<div className={styles.app} style={{ height: `${window.screen.height}px` }}>
 			<label className={styles.appLabel}>Tic Tac Toe</label>
@@ -55,8 +45,8 @@ export const App = () => {
 			<button className={styles.buttonStart} onClick={onClick}>
 				Start Game!
 			</button>
-			<div className={styles.wonMessage} style={{ display: `${none}` }}>
-				{message}
+			<div className={styles.wonMessage} style={{ display: `${ticTacToeWon.none}` }}>
+				{ticTacToeWon.message}
 			</div>
 		</div>
 	);
