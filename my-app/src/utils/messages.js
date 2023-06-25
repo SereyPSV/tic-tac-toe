@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 export const TicTacToeWon = (ticTacToe, playerN, none, message) => {
 	const resultWon = TicTacToeLogic(ticTacToe, playerN);
 	if (resultWon) {
-		none = 'flex';
+		return {
+			none: 'flex',
+			message: 'Player ' + (playerN === 'O' ? '2' : '1') + ' won!',
+			Background: { ...ticTacToeBackground, ...resultWon },
+		};
 	}
 	if (Object.values(ticTacToe).some((i) => i === '')) {
 		message = 'Player ' + (playerN === 'O' ? '2' : '1') + ' won!';
