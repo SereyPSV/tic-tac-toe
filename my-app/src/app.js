@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './app.module.css';
 
 import { CreateButtons, Players } from './components';
@@ -53,3 +54,9 @@ const AppLayout = ({ onClick, ticTacToe, ticTacToeWon }) => (
 		</div>
 	</div>
 );
+
+AppLayout.propTypes = {
+	onClick: PropTypes.func,
+	ticTacToe: PropTypes.object,
+	ticTacToeWon: PropTypes.object,
+};
